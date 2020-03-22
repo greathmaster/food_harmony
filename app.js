@@ -5,6 +5,15 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const keys = require("./config/keys")
+const path = require('path');
+
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('frontend/build'));
+	app.get('/', (req, res) => {
+	  res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+	})
+  }
+
 
 const foods = require("./routes/api/foods")
 
